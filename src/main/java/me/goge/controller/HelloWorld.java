@@ -18,13 +18,26 @@ public class HelloWorld {
     @RequestMapping("/get")
     @ResponseBody
     public String get(){
+        return bookService.getBookById(1).getName();
+    }
+
+
+    @RequestMapping("/delete")
+    @ResponseBody
+    public String delete(){
+        bookService.deleteBook(2);
+        return "delete";
+    }
+
+    @RequestMapping("/add")
+    @ResponseBody
+    public String add(){
         Book book = new Book();
         book.setPrice(123);
         book.setName("bok");
         book.setAuthor("wo");
         bookService.addBook(book);
-
-        return "Get";
+        return "delete";
     }
 
     @RequestMapping("/")

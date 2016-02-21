@@ -2,7 +2,7 @@ package me.goge.dao.impl;
 
 import me.goge.dao.BookDao;
 import me.goge.model.Book;
-import me.goge.service.common.AbstractHibernateDao;
+import me.goge.dao.common.AbstractHibernateDao;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -12,5 +12,8 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class BookDaoImpl extends AbstractHibernateDao<Book> implements BookDao {
-
+    public BookDaoImpl() {
+        super();
+        setClazz(Book.class);
+    }
 }

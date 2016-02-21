@@ -5,6 +5,7 @@
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:cache="http://www.springframework.org/schema/cache"
        xsi:schemaLocation="
        http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -14,6 +15,8 @@
        http://www.springframework.org/schema/tx/spring-tx.xsd
        http://www.springframework.org/schema/aop
        http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/cache
+       http://www.springframework.org/schema/cache/spring-cache.xsd
        ">
 
 
@@ -21,7 +24,6 @@
     <!-- 加载资源文件  其中包含变量信息，必须在Spring配置文件的最前面加载，即第一个加载-->
     <context:property-placeholder
             location="classpath:hibernate.properties"/>
-
 
 
     <context:component-scan base-package="me.goge"/>
@@ -33,6 +35,12 @@
 
 
     <aop:aspectj-autoproxy/>
+
+    <cache:annotation-driven cache-manager="cacheManager"/>
+    <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager"
+          p:cacheManager-ref="ehcache" />
+    <bean id="ehcache" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"
+          p:configLocation="classpath:/ehcache.xml" p:shared="true" />
 
     <!--定义数据源Bean，并注入数据源的必要信息-->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
@@ -50,7 +58,6 @@
           p:minEvictableIdleTimeMillis="${hibernate.minEvictableIdleTimeMillis}"
           p:maxOpenPreparedStatements="${hibernate.maxOpenPreparedStatements}"
     />
-
 
 
     <!-- 定义Hibernate的SessionFactory，SessionFactory需要依赖数据源，注入dataSource -->
@@ -72,6 +79,11 @@
                 <!--是否根据Hibernate映射创建数据表 -->
                 <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
                 <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+                <prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</prop>
+                <prop key="hibernate.cache.use_second_level_cache">true</prop>
+                <prop key="hibernate.cache.use_query_cache">true</prop>
+                <prop key="net.sf.ehcache.configurationResourceName">/ehcache.xml</prop>
+
             </props>
         </property>
     </bean>
@@ -86,15 +98,12 @@
           p:sessionFactory-ref="sessionFactory"/>
 
     <!--<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">-->
-        <!--<property name="dataSource" ref="dataSource" />-->
+    <!--<property name="dataSource" ref="dataSource" />-->
     <!--</bean>-->
 
     <!-- 配置事务异常封装 -->
     <bean id="persistenceExceptionTranslationPostProcessor"
           class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
-
-
-
 
 
 </beans>

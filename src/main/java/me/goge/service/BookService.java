@@ -11,6 +11,8 @@ public interface BookService
 	int addBook(Book book);
 
 	List<Book> getAllBooks();
+
+	Book getBookById(int id);
 	
 	void deleteBook(int id);
 }
