@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       ">
+
+
+    <!-- Hibernate4 -->
+    <!-- 加载资源文件  其中包含变量信息，必须在Spring配置文件的最前面加载，即第一个加载-->
+    <context:property-placeholder
+            location="classpath:hibernate.properties"/>
+
+
+
+    <context:component-scan base-package="me.goge"/>
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+
+    <aop:aspectj-autoproxy/>
+
+    <!--定义数据源Bean，并注入数据源的必要信息-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+          destroy-method="close"
+          p:url="${hibernate.connection.url}"
+          p:username="${hibernate.connection.username}"
+          p:password="${hibernate.connection.password}"
+          p:filters="${hibernate.filters}"
+          p:maxActive="${hibernate.maxActive}"
+          p:initialSize="${hibernate.initialSize}"
+          p:maxWait="${hibernate.maxWait}"
+          p:minIdle="${hibernate.minIdle}"
+          p:timeBetweenEvictionRunsMillis="${hibernate.timeBetweenEvictionRunsMillis}"
+          p:poolPreparedStatements="${hibernate.poolPreparedStatements}"
+          p:minEvictableIdleTimeMillis="${hibernate.minEvictableIdleTimeMillis}"
+          p:maxOpenPreparedStatements="${hibernate.maxOpenPreparedStatements}"
+    />
+
+
+
+    <!-- 定义Hibernate的SessionFactory，SessionFactory需要依赖数据源，注入dataSource -->
+    <bean id="sessionFactory"
+          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
+          p:dataSource-ref="dataSource">
+        <!-- packagesToScan 代替 annotatedClasses 来列出全部持久化类 -->
+        <property name="packagesToScan">
+            <list>
+                <!-- 可以加多个包 -->
+                <value>me.goge.model</value>
+            </list>
+        </property>
+        <!-- 定义Hibernate SessionFactory的属性 -->
+        <property name="hibernateProperties">
+            <props>
+                <!-- 指定Hibernate的连接方言 -->
+                <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+                <!--是否根据Hibernate映射创建数据表 -->
+                <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+                <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+            </props>
+        </property>
+    </bean>
+
+
+    <!-- 基于注释的事务，当注释中发现@Transactional时，使用id为“transactionManager”的事务管理器  -->
+    <!-- 如果没有设置transaction-manager的值，则spring以缺省默认的事务管理器来处理事务，默认事务管理器为第一个加载的事务管理器 -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <bean id="transactionManager"
+          class="org.springframework.orm.hibernate4.HibernateTransactionManager"
+          p:sessionFactory-ref="sessionFactory"/>
+
+    <!--<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">-->
+        <!--<property name="dataSource" ref="dataSource" />-->
+    <!--</bean>-->
+
+    <!-- 配置事务异常封装 -->
+    <bean id="persistenceExceptionTranslationPostProcessor"
+          class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+
+
+
+
+
+</beans>
