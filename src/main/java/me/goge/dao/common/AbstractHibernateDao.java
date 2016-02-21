@@ -1,5 +1,6 @@
-package me.goge.service.common;
+package me.goge.dao.common;
 
+import com.google.common.base.Preconditions;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,16 +12,22 @@ import java.util.List;
 /**
  * @Author joway
  * @Email joway.w@gmail.com
- *
- *  16/2/19.
+ * <p/>
+ * 16/2/19.
  */
-
+@SuppressWarnings("unchecked")
 @Transactional
-public abstract class AbstractHibernateDao <T extends Serializable> implements BaseDao<T> {
+public abstract class AbstractHibernateDao<T extends Serializable> implements BaseDao<T> {
 
+    protected Class<T> clazz;
 
     @Resource(name = "sessionFactory")
     private SessionFactory sessionFactory;
+
+
+    protected final void setClazz(final Class<T> clazz) {
+        this.clazz = Preconditions.checkNotNull(clazz);
+    }
 
     protected final Session getCurrentSession() {
         return sessionFactory.getCurrentSession();
@@ -55,11 +62,12 @@ public abstract class AbstractHibernateDao <T extends Serializable> implements B
 
     @Override
     public T searchById(int id) {
-        return null;
+        return (T) getCurrentSession().get(clazz, id);
     }
 
     @Override
     public List<T> searchAll() {
         return null;
     }
+
 }

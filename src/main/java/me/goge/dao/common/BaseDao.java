@@ -1,4 +1,4 @@
-package me.goge.service.common;
+package me.goge.dao.common;
 
 import java.io.Serializable;
 import java.util.List;
