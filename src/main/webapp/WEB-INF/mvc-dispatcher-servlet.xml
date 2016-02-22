@@ -6,8 +6,8 @@
        xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns:cache="http://www.springframework.org/schema/cache"
-       xsi:schemaLocation="
-       http://www.springframework.org/schema/beans
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd
@@ -17,7 +17,8 @@
        http://www.springframework.org/schema/aop/spring-aop.xsd
        http://www.springframework.org/schema/cache
        http://www.springframework.org/schema/cache/spring-cache.xsd
-       ">
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
 
     <!-- Hibernate4 -->
@@ -37,6 +38,10 @@
     <aop:aspectj-autoproxy/>
 
     <cache:annotation-driven cache-manager="cacheManager"/>
+
+    <!-- support JSR303 annotation if JSR 303 validation present on classpath -->
+    <mvc:annotation-driven/>
+
     <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager"
           p:cacheManager-ref="ehcache" />
     <bean id="ehcache" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"
@@ -60,10 +65,11 @@
     />
 
 
-    <!-- 定义Hibernate的SessionFactory，SessionFactory需要依赖数据源，注入dataSource -->
-    <bean id="sessionFactory"
-          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
+    <!-- JPA实体管理工厂的配置 -->
+    <bean id="entityManagerFactory"
+          class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
           p:dataSource-ref="dataSource">
+        <property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter"/>
         <!-- packagesToScan 代替 annotatedClasses 来列出全部持久化类 -->
         <property name="packagesToScan">
             <list>
@@ -71,11 +77,9 @@
                 <value>me.goge.model</value>
             </list>
         </property>
-        <!-- 定义Hibernate SessionFactory的属性 -->
-        <property name="hibernateProperties">
+        <property name="jpaProperties">
             <props>
-                <!-- 指定Hibernate的连接方言 -->
-                <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+                <prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>
                 <!--是否根据Hibernate映射创建数据表 -->
                 <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
                 <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
@@ -83,9 +87,21 @@
                 <prop key="hibernate.cache.use_second_level_cache">true</prop>
                 <prop key="hibernate.cache.use_query_cache">true</prop>
                 <prop key="net.sf.ehcache.configurationResourceName">/ehcache.xml</prop>
-
             </props>
         </property>
+    </bean>
+
+    <!--指定实现JPA的适配器-->
+    <bean id="hibernateJpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+        <property name="databasePlatform" value="org.hibernate.dialect.MySQLDialect" />
+    </bean>
+
+    <!--为了得到线程安全的EntityManager类型的成员变量, 需要增加如下配置-->
+    <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
+
+    <!-- Jpa 事务配置 -->
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
 
 
@@ -93,13 +109,26 @@
     <!-- 如果没有设置transaction-manager的值，则spring以缺省默认的事务管理器来处理事务，默认事务管理器为第一个加载的事务管理器 -->
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
-    <bean id="transactionManager"
-          class="org.springframework.orm.hibernate4.HibernateTransactionManager"
-          p:sessionFactory-ref="sessionFactory"/>
 
-    <!--<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">-->
-    <!--<property name="dataSource" ref="dataSource" />-->
-    <!--</bean>-->
+    <!-- JSR303 Validator定义 -->
+    <!-- 以下 validator  ConversionService 在使用 mvc:annotation-driven 会 自动注册-->
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <property name="providerClass"  value="org.hibernate.validator.HibernateValidator"/>
+        <property name="validationMessageSource" ref="messageSource"/>
+    </bean>
+    <!-- 国际化的消息资源文件（本系统中主要用于显示/错误消息定制） -->
+    <!--把bean validation的消息查找委托给spring的messageSource。-->
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basenames">
+            <list>
+                <!--默认message-->
+                <value>org.hibernate.validator.ValidationMessages</value>
+            </list>
+        </property>
+        <property name="useCodeAsDefaultMessage" value="false"/>
+        <property name="defaultEncoding" value="UTF-8"/>
+        <property name="cacheSeconds" value="60"/>
+    </bean>
 
     <!-- 配置事务异常封装 -->
     <bean id="persistenceExceptionTranslationPostProcessor"

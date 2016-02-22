@@ -1,20 +1,23 @@
 package me.goge.model;
 
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import java.io.Serializable;
 
 @Entity
 @Table(name="book_inf")
-//@Cache(usage= CacheConcurrencyStrategy.READ_ONLY, region="book")
+@Cache(usage= CacheConcurrencyStrategy.READ_ONLY, region="book")
 public class Book implements Serializable {
 	@Id @Column(name="book_id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	@Column(name="book_name")
 	private String name;
+
+    @Min(value=10, message = "{min.book.price}")
 	private double price;
 	private String author;
 	public Integer getId()
@@ -33,7 +36,8 @@ public class Book implements Serializable {
 	{
 		this.name = name;
 	}
-	public double getPrice()
+
+    public double getPrice()
 	{
 		return price;
 	}

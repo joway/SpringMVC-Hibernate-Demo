@@ -2,7 +2,7 @@ package me.goge.dao.impl;
 
 import me.goge.dao.BookDao;
 import me.goge.model.Book;
-import me.goge.dao.common.AbstractHibernateDao;
+import me.goge.dao.common.AbstractJPADao;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -10,8 +10,8 @@ import org.springframework.stereotype.Repository;
  * @Email joway.w@gmail.com
  * @Date 16/2/21.
  */
-@Repository
-public class BookDaoImpl extends AbstractHibernateDao<Book> implements BookDao {
+@Repository //用于标注数据访问组件
+public class BookDaoImpl extends AbstractJPADao<Book> implements BookDao {
     public BookDaoImpl() {
         super();
         setClazz(Book.class);

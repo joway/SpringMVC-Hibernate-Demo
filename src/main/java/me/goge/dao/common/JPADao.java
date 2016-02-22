@@ -12,13 +12,15 @@ import java.util.List;
 /*
  * 通用的操作接口
  */
-public interface BaseDao<T extends Serializable> {
+public interface JPADao<T extends Serializable> {
     void insert(T entity);
     void delete(T entity);
     void deleteById(int id);
     T update(T entity);
-    T search(T entity);
     T searchById(int id);
-
     List<T> searchAll();
+    List<T> searchByJPQL(String jpql , Object... params);
+
+    void deleteAllCache();
+
 }

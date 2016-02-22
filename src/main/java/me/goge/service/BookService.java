@@ -15,4 +15,6 @@ public interface BookService
 	Book getBookById(int id);
 	
 	void deleteBook(int id);
+
+	void deleteAllCache();
 }

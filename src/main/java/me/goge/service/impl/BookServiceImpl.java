@@ -8,6 +8,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.util.List;
 
 
@@ -18,26 +19,22 @@ public class BookServiceImpl implements BookService
 	@Resource
 	private BookDao bookDao;
 
-	public BookServiceImpl() {
-		super();
-
-	}
-
 	@Override
-	public int addBook(Book book) {
-		System.out.println("add book ");
+	@Cacheable(value = "dbCache")
+	public int addBook(@Valid Book book) {
 		bookDao.insert(book);
-		return 0;
+		return book.getId();
 	}
 
 	@Override
+	@Cacheable(value = "dbCache")
 	public List<Book> getAllBooks() {
-		return null;
+		return bookDao.searchAll();
 	}
 
 	@Override
 	@Cacheable(value = "dbCache") // add cache .
-	// 改注解还有个参数key：默认为空，即表示使用方法的参数类型及参数值作为key，支持SpEL
+	// Cacheable注解还有个参数key：默认为空，即表示使用方法的参数类型及参数值作为key，支持SpEL
 	public Book getBookById(int id) {
 		return bookDao.searchById(id);
 	}
@@ -46,6 +43,11 @@ public class BookServiceImpl implements BookService
 	@CacheEvict(value = "dbCache") // delete cache
 	// 还有个参数key, 默认同上, 清除key对应的cache
 	public void deleteBook(int id) {
+		bookDao.deleteById(id);
 		System.out.println("delete");
 	}
+
+    public void deleteAllCache() {
+        bookDao.deleteAllCache();
+    }
 }
