@@ -20,6 +20,9 @@ public interface JPADao<T extends Serializable> {
     T searchById(int id);
     List<T> searchAll();
     List<T> searchByJPQL(String jpql , Object... params);
+    List<T> searchByPage(String jpql , int pageNo,int pageSize);
+    List<T> searchAllByPage(int pageNo,int pageSize);
+    long getCount();
 
     void deleteAllCache();
 
