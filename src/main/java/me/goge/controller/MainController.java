@@ -15,7 +15,8 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller("/")
-public class HelloWorld {
+public class MainController {
+
 
     @Resource
     private BookService bookService;
@@ -62,27 +63,31 @@ public class HelloWorld {
     @RequestMapping("/valid")
     @ResponseBody
     public String valid(@Valid Book book, BindingResult result) {
-        System.out.println(result.getAllErrors());
+        if (!result.hasErrors()) {
+            return "ok";
+        }
+        String rst = "";
         for (Object object : result.getAllErrors()) {
             if (object instanceof FieldError) {
                 FieldError fieldError = (FieldError) object;
-
-                System.out.println(fieldError.getField() + ":"
-                        + fieldError.getCode());
+                rst += fieldError.getField() + ":"
+                        + fieldError.getCode() + "\n";
 
             }
 
             if (object instanceof ObjectError) {
                 ObjectError objectError = (ObjectError) object;
-                System.out.println(objectError.getCode() + ":"
-                        + objectError.getObjectName() +": "+objectError.getDefaultMessage());
+                rst += objectError.getCode() + ":"
+                        + objectError.getObjectName() + ": " + objectError.getDefaultMessage() + "\n";
             }
         }
-        return result.getAllErrors().toString();
+        System.out.println(rst);
+        return "error";
     }
 
     @RequestMapping("/")
     public String index() {
+        System.out.println(bookService.getAllBooks());
         return "index";
     }
 }

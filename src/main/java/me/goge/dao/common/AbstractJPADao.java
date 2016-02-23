@@ -33,6 +33,7 @@ public abstract class AbstractJPADao<T extends Serializable> implements JPADao<T
     }
 
     @Override
+    @CachePut(value = "dbCache", key = "#root.caches[0].name")
     @Cacheable(value = "dbCache") // add cache
     // Cacheable注解还有个参数key：默认为空，即表示使用方法的参数类型及参数值作为key，支持SpEL
     public void insert(T entity) {
@@ -55,7 +56,7 @@ public abstract class AbstractJPADao<T extends Serializable> implements JPADao<T
 
 
     @Override
-    @CachePut(value = "dbCache")
+    @CachePut(value = "dbCache") // 每次都会更新缓存
     public T update(T entity) {
         return (T) entityManager.merge(entity);
     }
@@ -66,8 +67,8 @@ public abstract class AbstractJPADao<T extends Serializable> implements JPADao<T
         return (T) entityManager.find(clazz, id);
     }
 
+    // 发现如果insert了一个值后,searchAll 仍旧会是缓存后的值,故而取消了它的缓存
     @Override
-    @Cacheable(value = "dbCache")
     public List<T> searchAll() {
         return searchByJPQL("select en from "
                 + clazz.getSimpleName() + " en");
@@ -95,12 +96,10 @@ public abstract class AbstractJPADao<T extends Serializable> implements JPADao<T
     @Override
     @Cacheable(value = "dbCache")
     public long getCount() {
-        List<?> l = searchByJPQL("select count(*) from "
+        List<?> result = searchByJPQL("select count(*) from "
                 + clazz.getSimpleName());
-        // 返回查询得到的实体总数
-        if (l != null && l.size() == 1 )
-        {
-            return (Long)l.get(0);
+        if (result != null && result.size() == 1) {
+            return (Long) result.get(0);
         }
         return 0;
     }
@@ -120,6 +119,6 @@ public abstract class AbstractJPADao<T extends Serializable> implements JPADao<T
     @Cacheable(value = "dbCache")
     public List<T> searchAllByPage(int pageNo, int pageSize) {
         return searchByPage("select en from "
-                + clazz.getSimpleName() + " en",pageNo,pageSize);
+                + clazz.getSimpleName() + " en", pageNo, pageSize);
     }
 }

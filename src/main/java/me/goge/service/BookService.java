@@ -8,7 +8,7 @@ import java.util.List;
 public interface BookService
 {
 	// ÃÌº”Õº È
-	int addBook(Book book);
+	void addBook(Book book);
 
 	List<Book> getAllBooks();
 
@@ -17,4 +17,8 @@ public interface BookService
 	void deleteBook(int id);
 
 	void deleteAllCache();
+
+    long getBookCount();
+
+    void updateBook(Book book);
 }

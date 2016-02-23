@@ -18,9 +18,8 @@ public class BookServiceImpl implements BookService
 	private BookDao bookDao;
 
 	@Override
-	public int addBook(@Valid Book book) {
+	public void addBook(@Valid Book book) {
 		bookDao.insert(book);
-		return book.getId();
 	}
 
 	@Override
@@ -39,7 +38,18 @@ public class BookServiceImpl implements BookService
 		System.out.println("delete");
 	}
 
+    @Override
     public void deleteAllCache() {
         bookDao.deleteAllCache();
+    }
+
+    @Override
+    public long getBookCount(){
+        return bookDao.getCount();
+    }
+
+    @Override
+    public void updateBook(Book book) {
+        bookDao.update(book);
     }
 }
