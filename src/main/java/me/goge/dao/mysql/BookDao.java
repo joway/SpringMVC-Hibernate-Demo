@@ -1,4 +1,4 @@
-package me.goge.dao;
+package me.goge.dao.mysql;
 
 
 import me.goge.model.Book;

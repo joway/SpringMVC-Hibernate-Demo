@@ -1,6 +1,6 @@
-package me.goge.dao.impl;
+package me.goge.dao.mysql.impl;
 
-import me.goge.dao.BookDao;
+import me.goge.dao.mysql.BookDao;
 import me.goge.model.Book;
 import me.goge.dao.common.AbstractJPADao;
 import org.springframework.stereotype.Repository;

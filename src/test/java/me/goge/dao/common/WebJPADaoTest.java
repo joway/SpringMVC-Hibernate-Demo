@@ -1,6 +1,6 @@
 package me.goge.dao.common;
 
-import common.AbstractContextControllerTests;
+import common.WebContextConfiguration;
 import me.goge.model.Book;
 import me.goge.service.BookService;
 import org.junit.Before;
@@ -23,7 +23,7 @@ import static org.junit.Assert.assertEquals;
 @SuppressWarnings("unchecked")
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(SpringJUnit4ClassRunner.class)
-public class AbstractJPADaoTest extends AbstractContextControllerTests {
+public class WebJPADaoTest extends WebContextConfiguration {
 
     @Resource
     BookService bookService;

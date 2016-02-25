@@ -19,11 +19,10 @@
        ">
 
 
-<!-- Hibernate4 -->
+    <!-- Hibernate4 -->
     <!-- 加载资源文件  其中包含变量信息，必须在Spring配置文件的最前面加载，即第一个加载-->
     <context:property-placeholder
             location="classpath:hibernate.properties"/>
-
 
 
     <aop:aspectj-autoproxy/>
@@ -31,9 +30,9 @@
     <cache:annotation-driven cache-manager="cacheManager"/>
 
     <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager"
-          p:cacheManager-ref="cacheManagerFactory" />
+          p:cacheManager-ref="cacheManagerFactory"/>
     <bean id="cacheManagerFactory" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"
-          p:configLocation="classpath:/ehcache.xml" p:shared="true" />
+          p:configLocation="classpath:/ehcache.xml" p:shared="true"/>
 
     <!--定义数据源Bean，并注入数据源的必要信息-->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
@@ -81,7 +80,7 @@
 
     <!--指定实现JPA的适配器-->
     <bean id="hibernateJpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-        <property name="databasePlatform" value="org.hibernate.dialect.MySQLDialect" />
+        <property name="databasePlatform" value="org.hibernate.dialect.MySQLDialect"/>
     </bean>
 
     <!--为了得到线程安全的EntityManager类型的成员变量, 需要增加如下配置-->
@@ -108,12 +107,13 @@
     </bean>
     <bean id="druid-type-proxyCreator" class="com.alibaba.druid.support.spring.stat.BeanTypeAutoProxyCreator">
         <!-- 所有ABCInterface的派生类被拦截监控  -->
-        <property name="targetBeanType" value="me.goge.dao.common.JPADao" />
+        <property name="targetBeanType" value="me.goge.dao.common.JPADao"/>
         <property name="interceptorNames">
             <list>
                 <value>druid-stat-interceptor</value>
             </list>
         </property>
     </bean>
+
 
 </beans>
