@@ -1,0 +1,72 @@
+2016-02-24 22:48:16  [ main:133 ] - [ INFO ]  Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2016-02-24 22:48:16  [ main:166 ] - [ INFO ]  Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@32fe9baa, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@699dd00d, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@77c63ba6, org.springframework.test.context.support.DirtiesContextTestExecutionListener@77764cb8, org.springframework.test.context.transaction.TransactionalTestExecutionListener@77a7014d, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@7546a399]
+2016-02-24 22:48:17  [ main:638 ] - [ INFO ]  Loading XML bean definitions from URL [file:src/main/webapp/WEB-INF/root-context.xml]
+2016-02-24 22:48:18  [ main:1870 ] - [ INFO ]  Loading XML bean definitions from URL [file:src/main/webapp/WEB-INF/hibernate-jpa.xml]
+2016-02-24 22:48:18  [ main:2149 ] - [ INFO ]  Loading XML bean definitions from URL [file:src/main/webapp/WEB-INF/redis.xml]
+2016-02-24 22:48:18  [ main:2227 ] - [ INFO ]  Refreshing org.springframework.context.support.GenericApplicationContext@360f0ac4: startup date [Wed Feb 24 22:48:18 CST 2016]; root of context hierarchy
+2016-02-24 22:48:19  [ main:2913 ] - [ INFO ]  Loading properties file from class path resource [hibernate.properties]
+2016-02-24 22:48:19  [ main:2914 ] - [ INFO ]  Loading properties file from class path resource [redis.properties]
+2016-02-24 22:48:20  [ main:3954 ] - [ INFO ]  Building JPA container EntityManagerFactory for persistence unit 'default'
+2016-02-24 22:48:20  [ main:4153 ] - [ INFO ]  HHH000412: Hibernate Core {5.1.0.Final}
+2016-02-24 22:48:20  [ main:4161 ] - [ INFO ]  HHH000205: Loaded properties from resource hibernate.properties: {hibernate.timeBetweenEvictionRunsMillis=60000, hibernate.initialSize=1, hibernate.minEvictableIdleTimeMillis=300000, hibernate.filters=wall,stat, hibernate.dialect=org.hibernate.dialect.MySQLDialect, hibernate.maxWait=60000, hibernate.poolPreparedStatements=true, hibernate.minIdle=1, hibernate.maxActive=20, hibernate.connection.username=root, hibernate.hbm2ddl.auto=update, hibernate.maxOpenPreparedStatements=20, hibernate.connection.url=jdbc:mysql://localhost:3306/spring?useUnicode=true&characterEncoding=UTF-8, hibernate.show_sql=true, hibernate.bytecode.use_reflection_optimizer=false, hibernate.connection.password=****}
+2016-02-24 22:48:20  [ main:4162 ] - [ INFO ]  HHH000021: Bytecode provider name : javassist
+2016-02-24 22:48:20  [ main:4330 ] - [ INFO ]  HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2016-02-24 22:48:20  [ main:4345 ] - [ WARN ]  HHH90000006: Attempted to specify unsupported NamingStrategy via setting [hibernate.ejb.naming_strategy]; NamingStrategy has been removed in favor of the split ImplicitNamingStrategy and PhysicalNamingStrategy; use [hibernate.implicit_naming_strategy] or [hibernate.physical_naming_strategy], respectively, instead.
+2016-02-24 22:48:21  [ main:5167 ] - [ INFO ]  {dataSource-1} inited
+2016-02-24 22:48:21  [ main:5192 ] - [ INFO ]  HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2016-02-24 22:48:23  [ main:6415 ] - [ WARN ]  Configuration problem for cache dbCache: MaxEntriesLocalHeap equal or greater than MaxEntriesLocalDisk. This will result in useless disk storage.
+2016-02-24 22:48:23  [ main:6576 ] - [ INFO ]  HHH000250: Starting update timestamps cache at region: org.hibernate.cache.spi.UpdateTimestampsCache
+2016-02-24 22:48:23  [ main:6584 ] - [ INFO ]  HHH000248: Starting query cache at region: org.hibernate.cache.internal.StandardQueryCache
+2016-02-24 22:48:23  [ main:6625 ] - [ INFO ]  HV000001: Hibernate Validator 5.1.0.Final
+2016-02-24 22:48:23  [ main:6969 ] - [ WARN ]  HHH020003: Could not find a specific ehcache configuration for cache named [book]; using defaults.
+2016-02-24 22:48:25  [ Thread-5:8905 ] - [ INFO ]  Closing org.springframework.context.support.GenericApplicationContext@360f0ac4: startup date [Wed Feb 24 22:48:18 CST 2016]; root of context hierarchy
+2016-02-24 22:48:25  [ Thread-5:8922 ] - [ INFO ]  Closing JPA EntityManagerFactory for persistence unit 'default'
+2016-02-24 22:48:25  [ Thread-5:8959 ] - [ INFO ]  {dataSource-1} closed
+2016-02-24 22:49:00  [ main:123 ] - [ INFO ]  Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2016-02-24 22:49:01  [ main:238 ] - [ INFO ]  Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@77c63ba6, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@77764cb8, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@77a7014d, org.springframework.test.context.support.DirtiesContextTestExecutionListener@7546a399, org.springframework.test.context.transaction.TransactionalTestExecutionListener@709ecdf5, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@49e3c996]
+2016-02-24 22:49:01  [ main:584 ] - [ INFO ]  Loading XML bean definitions from URL [file:src/main/webapp/WEB-INF/root-context.xml]
+2016-02-24 22:49:02  [ main:1474 ] - [ INFO ]  Loading XML bean definitions from URL [file:src/main/webapp/WEB-INF/hibernate-jpa.xml]
+2016-02-24 22:49:02  [ main:1733 ] - [ INFO ]  Loading XML bean definitions from URL [file:src/main/webapp/WEB-INF/redis.xml]
+2016-02-24 22:49:02  [ main:1802 ] - [ INFO ]  Refreshing org.springframework.context.support.GenericApplicationContext@138de5e7: startup date [Wed Feb 24 22:49:02 CST 2016]; root of context hierarchy
+2016-02-24 22:49:03  [ main:2441 ] - [ INFO ]  Loading properties file from class path resource [hibernate.properties]
+2016-02-24 22:49:03  [ main:2442 ] - [ INFO ]  Loading properties file from class path resource [redis.properties]
+2016-02-24 22:49:04  [ main:3756 ] - [ INFO ]  Building JPA container EntityManagerFactory for persistence unit 'default'
+2016-02-24 22:49:04  [ main:3944 ] - [ INFO ]  HHH000412: Hibernate Core {5.1.0.Final}
+2016-02-24 22:49:04  [ main:3950 ] - [ INFO ]  HHH000205: Loaded properties from resource hibernate.properties: {hibernate.timeBetweenEvictionRunsMillis=60000, hibernate.initialSize=1, hibernate.minEvictableIdleTimeMillis=300000, hibernate.filters=wall,stat, hibernate.dialect=org.hibernate.dialect.MySQLDialect, hibernate.maxWait=60000, hibernate.poolPreparedStatements=true, hibernate.minIdle=1, hibernate.maxActive=20, hibernate.connection.username=root, hibernate.hbm2ddl.auto=update, hibernate.maxOpenPreparedStatements=20, hibernate.connection.url=jdbc:mysql://localhost:3306/spring?useUnicode=true&characterEncoding=UTF-8, hibernate.show_sql=true, hibernate.bytecode.use_reflection_optimizer=false, hibernate.connection.password=****}
+2016-02-24 22:49:04  [ main:3951 ] - [ INFO ]  HHH000021: Bytecode provider name : javassist
+2016-02-24 22:49:05  [ main:4187 ] - [ INFO ]  HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2016-02-24 22:49:05  [ main:4221 ] - [ WARN ]  HHH90000006: Attempted to specify unsupported NamingStrategy via setting [hibernate.ejb.naming_strategy]; NamingStrategy has been removed in favor of the split ImplicitNamingStrategy and PhysicalNamingStrategy; use [hibernate.implicit_naming_strategy] or [hibernate.physical_naming_strategy], respectively, instead.
+2016-02-24 22:49:05  [ main:5092 ] - [ INFO ]  {dataSource-1} inited
+2016-02-24 22:49:05  [ main:5129 ] - [ INFO ]  HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2016-02-24 22:49:07  [ main:6372 ] - [ WARN ]  Configuration problem for cache dbCache: MaxEntriesLocalHeap equal or greater than MaxEntriesLocalDisk. This will result in useless disk storage.
+2016-02-24 22:49:07  [ main:6713 ] - [ INFO ]  HHH000250: Starting update timestamps cache at region: org.hibernate.cache.spi.UpdateTimestampsCache
+2016-02-24 22:49:07  [ main:6728 ] - [ INFO ]  HHH000248: Starting query cache at region: org.hibernate.cache.internal.StandardQueryCache
+2016-02-24 22:49:07  [ main:6817 ] - [ INFO ]  HV000001: Hibernate Validator 5.1.0.Final
+2016-02-24 22:49:08  [ main:7259 ] - [ WARN ]  HHH020003: Could not find a specific ehcache configuration for cache named [book]; using defaults.
+2016-02-24 22:49:09  [ Thread-5:9023 ] - [ INFO ]  Closing org.springframework.context.support.GenericApplicationContext@138de5e7: startup date [Wed Feb 24 22:49:02 CST 2016]; root of context hierarchy
+2016-02-24 22:49:09  [ Thread-5:9040 ] - [ INFO ]  Closing JPA EntityManagerFactory for persistence unit 'default'
+2016-02-24 22:49:09  [ Thread-5:9075 ] - [ INFO ]  {dataSource-1} closed
+2016-02-24 22:50:16  [ main:159 ] - [ INFO ]  Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2016-02-24 22:50:16  [ main:213 ] - [ INFO ]  Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@77c63ba6, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@77764cb8, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@77a7014d, org.springframework.test.context.support.DirtiesContextTestExecutionListener@7546a399, org.springframework.test.context.transaction.TransactionalTestExecutionListener@709ecdf5, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@49e3c996]
+2016-02-24 22:50:17  [ main:640 ] - [ INFO ]  Loading XML bean definitions from URL [file:src/main/webapp/WEB-INF/root-context.xml]
+2016-02-24 22:50:18  [ main:2301 ] - [ INFO ]  Loading XML bean definitions from URL [file:src/main/webapp/WEB-INF/hibernate-jpa.xml]
+2016-02-24 22:50:19  [ main:2630 ] - [ INFO ]  Loading XML bean definitions from URL [file:src/main/webapp/WEB-INF/redis.xml]
+2016-02-24 22:50:19  [ main:2684 ] - [ INFO ]  Refreshing org.springframework.context.support.GenericApplicationContext@138de5e7: startup date [Wed Feb 24 22:50:19 CST 2016]; root of context hierarchy
+2016-02-24 22:50:19  [ main:3401 ] - [ INFO ]  Loading properties file from class path resource [hibernate.properties]
+2016-02-24 22:50:19  [ main:3404 ] - [ INFO ]  Loading properties file from class path resource [redis.properties]
+2016-02-24 22:50:21  [ main:4500 ] - [ INFO ]  Building JPA container EntityManagerFactory for persistence unit 'default'
+2016-02-24 22:50:21  [ main:4741 ] - [ INFO ]  HHH000412: Hibernate Core {5.1.0.Final}
+2016-02-24 22:50:21  [ main:4746 ] - [ INFO ]  HHH000205: Loaded properties from resource hibernate.properties: {hibernate.timeBetweenEvictionRunsMillis=60000, hibernate.initialSize=1, hibernate.minEvictableIdleTimeMillis=300000, hibernate.filters=wall,stat, hibernate.dialect=org.hibernate.dialect.MySQLDialect, hibernate.maxWait=60000, hibernate.poolPreparedStatements=true, hibernate.minIdle=1, hibernate.maxActive=20, hibernate.connection.username=root, hibernate.hbm2ddl.auto=update, hibernate.maxOpenPreparedStatements=20, hibernate.connection.url=jdbc:mysql://localhost:3306/spring?useUnicode=true&characterEncoding=UTF-8, hibernate.show_sql=true, hibernate.bytecode.use_reflection_optimizer=false, hibernate.connection.password=****}
+2016-02-24 22:50:21  [ main:4747 ] - [ INFO ]  HHH000021: Bytecode provider name : javassist
+2016-02-24 22:50:21  [ main:4869 ] - [ INFO ]  HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2016-02-24 22:50:21  [ main:4885 ] - [ WARN ]  HHH90000006: Attempted to specify unsupported NamingStrategy via setting [hibernate.ejb.naming_strategy]; NamingStrategy has been removed in favor of the split ImplicitNamingStrategy and PhysicalNamingStrategy; use [hibernate.implicit_naming_strategy] or [hibernate.physical_naming_strategy], respectively, instead.
+2016-02-24 22:50:22  [ main:5589 ] - [ INFO ]  {dataSource-1} inited
+2016-02-24 22:50:22  [ main:5624 ] - [ INFO ]  HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2016-02-24 22:50:23  [ main:6561 ] - [ WARN ]  Configuration problem for cache dbCache: MaxEntriesLocalHeap equal or greater than MaxEntriesLocalDisk. This will result in useless disk storage.
+2016-02-24 22:50:23  [ main:6661 ] - [ INFO ]  HHH000250: Starting update timestamps cache at region: org.hibernate.cache.spi.UpdateTimestampsCache
+2016-02-24 22:50:23  [ main:6669 ] - [ INFO ]  HHH000248: Starting query cache at region: org.hibernate.cache.internal.StandardQueryCache
+2016-02-24 22:50:23  [ main:6725 ] - [ INFO ]  HV000001: Hibernate Validator 5.1.0.Final
+2016-02-24 22:50:23  [ main:7062 ] - [ WARN ]  HHH020003: Could not find a specific ehcache configuration for cache named [book]; using defaults.
+2016-02-24 22:50:25  [ Thread-5:8813 ] - [ INFO ]  Closing org.springframework.context.support.GenericApplicationContext@138de5e7: startup date [Wed Feb 24 22:50:19 CST 2016]; root of context hierarchy
+2016-02-24 22:50:25  [ Thread-5:8819 ] - [ INFO ]  Closing JPA EntityManagerFactory for persistence unit 'default'
+2016-02-24 22:50:25  [ Thread-5:8835 ] - [ INFO ]  {dataSource-1} closed

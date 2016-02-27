@@ -1,6 +1,6 @@
 package me.goge.service.impl;
 
-import me.goge.dao.BookDao;
+import me.goge.dao.mysql.BookDao;
 import me.goge.model.Book;
 import me.goge.service.BookService;
 import org.springframework.stereotype.Service;

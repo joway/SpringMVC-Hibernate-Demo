@@ -13,9 +13,14 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>
             /WEB-INF/root-context.xml
-            /WEB-INF/persistent.xml
+            /WEB-INF/hibernate-validator.xml
+            /WEB-INF/hibernate-jpa.xml
+            /WEB-INF/cache.xml
+            /WEB-INF/redis.xml
         </param-value>
     </context-param>
+
+
     <!-- Creates the Spring Container shared by all Servlets and Filters -->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

@@ -1,7 +1,7 @@
 package me.goge.controller;
 
 
-import common.AbstractContextControllerTests;
+import common.WebContextConfiguration;
 import me.goge.model.Book;
 import me.goge.service.BookService;
 import org.junit.Before;
@@ -32,7 +32,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(SpringJUnit4ClassRunner.class)
-public class MainControllerTest extends AbstractContextControllerTests {
+public class MainControllerTest extends WebContextConfiguration {
 
     private MockMvc mockMvc;
 
@@ -49,7 +49,7 @@ public class MainControllerTest extends AbstractContextControllerTests {
 
     @Test
     public void testA_Get() throws Exception {
-        this.mockMvc.perform(get("/get").param("id", "1"))
+        this.mockMvc.perform(get("/value_get").param("id", "1"))
                 .andExpect(content().string("{\"id\":1,\"name\":\"dao\",\"price\":100.0,\"author\":\"joway\"}"));
     }
 
